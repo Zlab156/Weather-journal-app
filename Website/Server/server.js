@@ -23,7 +23,7 @@ app.use(cors());
 
 
 // Setup Server
-const port = 8080;
+const port = 5500;
 
 const server = app.listen(port, listening);
 
