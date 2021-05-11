@@ -33,23 +33,18 @@ function listening() {
 }
 
 //Get data
-app.get('/all', getWeather);
+app.get('/all', getData);
 
-function getWeather(req, res) {
-    res.send(projectData);
-    projectData = [];
-}
+function getData(require, response) {
+    response.send(projectData);
+    console.log('projectData');
+};
 
 //Post data
-app.post('/add', addData);
+app.post('/postData', (require, response) => {
+    console.log(require.body);
+    projectData = require.body;
+    response.send(projectData);
+});
 
-function addData (req,res) {
-    Newjournalpost = {
-       context: req.body.context,
-       temp: req.body.temp,
-       date: req.body.date, 
-    }
-    projectData = Newjournalpost;
-    res.send(data);
-    console.log(Newjournalpost);
-};
+

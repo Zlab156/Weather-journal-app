@@ -11,29 +11,29 @@ document.getElementById('generate').addEventListener('click', performAction);
 function performAction(e){
     let zip = document.getElementById('zip').value;
     let feelings = document.getElementById('feelings').value;
-    let temperature = document.getElementById('temp').value;
     getWeather(baseURL, zip, apikey)
     .then(function (data) {
         // add data to POST request
+        const temperature = data.main.temp;
         console.log(data);
-        postData('/add', { date: newDate, temperature: temp, context:feelings}).then(updateUI());
+        postData('/all', {date: newDate, temperature: temp, feelings: feelings}).then(updateUI());
     });
-}; 
+} 
 //Get weather
 const getWeather = async(baseURL, zip, apikey) => {
-    const res = await fetch(baseURL+zip+apikey)
+    const response = await fetch(baseURL+zip+apikey);
     try {
-        const data = await res.json();
-             console.log(data)
+        const data = await response.json();
              return data;
         } catch (error) {
              console.log("error", error);
         } 
-    }
-    
+    };
+;      
 //Post data
-const postData = async(url, data) => {
-    const res = await fetch(url, {
+const postData = async( baseURL = '', data ={})=> {
+    console.log(data);
+    const response = await fetch(baseURL, {
         method: 'POST',
         credentials: 'same-origin',
         headers: {
@@ -41,24 +41,16 @@ const postData = async(url, data) => {
         },
         body: JSON.stringify(data),
     });
-
-    try {
-        const resData = await response.json();
-        console.log(resData);
-        return resData;
-    } catch (error) {
-        console.log('error', error);
-    }
 }
 
 const updateUI = async () => {
     const request = await fetch('/all');
+    console.log('')
     try {
         const allData = await request.json();
-        console.log(allData);
-        document.getElementById('date').innerHTML = allData[0].date;
-        document.getElementById('temp').innerHTML = allData[0].temp;
-        document.getElementById('content').innerHTML = allData[0].feelings;
+        document.getElementById('date').innerHTML = allData["date"];
+        document.getElementById('temp').innerHTML = allData["temp"];
+        document.getElementById('feelings').innerHTML = allData["feelings"];
     }
     catch (error) {
         console.log("error", error);

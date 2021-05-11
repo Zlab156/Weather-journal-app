@@ -1,5 +1,5 @@
 body{
-    background: #fffff8;
+    background: gray;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
@@ -8,8 +8,8 @@ body{
     grid-auto-rows: minmax(150px, auto);
     /* grid-template-columns:  */
     height:100vh;
-    background: #f23557;
-    color: #f0d43a;
+    background: white;
+    color: blue;
     justify-content: center;
     grid-gap: 1em;
     font-size: 20px;
@@ -58,7 +58,7 @@ input{
     height: 60px;
     width: 320px;
     background:#22b2da;
-    color: #f0d43a;
+    color: black;
     font-size: 20px;
     font-family: 'Oswald', sans-serif;
     border: none;
